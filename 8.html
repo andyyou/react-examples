@@ -1,0 +1,33 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Test = React.createClass({
+      getInitialState: function () {
+        return {no: 'No.1'}
+      },
+      render: function () {
+        return (
+          <input type='text' value={this.state.no} />
+        );
+      }
+    });
+    var id = 1;
+    var test = React.renderComponent(<Test />, document.getElementById('example'));
+    setInterval(function () {
+      id += 1;
+      var str = 'No.' + id;
+      console.log(id);
+      test.setState({no: str});
+    }, 1000);
+    </script>
+  </body>
+</html>

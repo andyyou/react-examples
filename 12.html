@@ -1,0 +1,59 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <div>
+      原生 Javascript 範例示範 focus 所以我們可以透過 element.focus() 讓元素 focus。
+      <div id='test-trigger'>Click!</div>
+      <input type='text' id='test' />
+    </div>
+    <script>
+    // 原生 Javascript 範例示範 focus
+    var HandleClick = function (e) {
+      var el = document.getElementById('test');
+      el.focus();
+    };
+    var el = document.getElementById('test-trigger');
+    if (el.addEventListener) {
+      el.addEventListener('click', HandleClick, false);
+    } else {
+      el.attachEvent('onclick', HandleClick);
+    }
+    </script>
+
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var App = React.createClass({
+      getInitialState: function () {
+        return {userInput: ''}
+      },
+      handleKeyUp: function (e) {
+        this.setState({userInput: this.getDOMNode().value});
+      },
+      clearAndFocusInput: function () {
+        this.setState({userInput: ''});
+        // console.log(this.rememberThisInput);
+        // this.rememberThisInput.focus();
+      },
+      render: function () {
+        var myInput = <input value={this.state.userInput} onKeyUp={this.handleKeyUp} />
+        this.rememberThisInput = myInput;
+        return (
+          <div>
+            <div onClick={this.clearAndFocusInput} >Click to Focus and Reset</div>
+            {myInput}
+          </div>
+        );
+      }
+
+    });
+    React.renderComponent(<App />, document.getElementById('example'));
+    </script>
+  </body>
+</html>

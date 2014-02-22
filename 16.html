@@ -1,0 +1,53 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <div id='ex2'></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var SetIntervalMixin = {
+      componentWillMount: function () {
+        console.log("componentWillMount");
+        this.intervals = [];
+        console.log(this.intervals);
+      },
+      setInterval: function () {
+        console.log(arguments);
+        this.intervals.push(setInterval.apply(null, arguments));
+      },
+      componentWillUnmount: function () {
+        this.intervals.map(clearInterval);
+      }
+    };
+    var TickTock = React.createClass({
+      mixins: [SetIntervalMixin],
+      getInitialState: function () {
+        return {seconds: 0}
+      },
+      componentDidMount: function () {
+        this.setInterval(this.tick, 1000);
+      },
+      tick: function () {
+        console.log(this.intervals);
+        this.setState({seconds: this.state.seconds + 1});
+      },
+      render: function () {
+        return (
+          <p>
+            React has been running for {this.state.seconds} seconds.
+          </p>
+        );
+      }
+    });
+    React.renderComponent(<TickTock />, document.getElementById('example'));
+    React.renderComponent(<TickTock />, document.getElementById('ex2'));
+    clearInterval(3);
+    </script>
+  </body>
+</html>

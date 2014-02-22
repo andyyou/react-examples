@@ -1,0 +1,27 @@
+<!-- empty.html -->
+<html>
+<head>
+<title>Hello React</title>
+  <script src="http://fb.me/react-0.8.0.js"></script>
+  <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+</head>
+<body>
+  <div id='example'></div>
+  <script type='text/jsx'>
+  /** @jsx React.DOM */
+  var Dropdown = React.createClass({
+    render: function () {
+      return (
+        <select value={this.props.selected} defaultValue="B">
+          <option value="A">Apple</option>
+          <option value="B">Banana</option>
+          <option value="C">Cranberry</option>
+        </select>
+      );
+    }
+  });
+  React.renderComponent(<Dropdown />, document.getElementById('example'));
+  </script>
+</body>
+</html>

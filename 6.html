@@ -1,0 +1,35 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var data = [{id: 1, text:'A'}];
+    var List = React.createClass({
+      render: function () {
+        var results = this.props.results;
+        console.log(results);
+        return (
+          <ol>
+            {results.map(function (result) {
+              return <input type='text' key={result.id}/>;
+            })}
+          </ol>
+        );
+      }
+    });
+    var list = React.renderComponent(<List results={data} />, document.getElementById('example'));
+
+    setInterval(function() {
+      data[0].id += 1;
+      React.renderComponent(<List results={data} />, document.getElementById('example'));
+    }, 5000)
+    </script>
+  </body>
+</html>

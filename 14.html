@@ -1,0 +1,28 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+
+
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var ComponentWithDefault = React.createClass({
+      getDefaultProps: function () {
+        return {value: 'B'}
+      },
+      render: function () {
+        return (
+          <div>{this.props.value}</div>
+        );
+      }
+    });
+    React.renderComponent(<ComponentWithDefault value='A' />, document.getElementById('example'));
+    </script>
+  </body>
+</html>

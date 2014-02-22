@@ -1,0 +1,48 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="car"></div>
+    <div id="bike"></div>
+    <input value='abc' />
+    <div style='width:50px; height:50px; background: blue;' draggable="true"></div>
+    <script>
+
+    </script>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Car = function (wheel, brand) {
+      this.wheel = wheel;
+      this.brand = brand;
+    };
+    Car.prototype.run = function () {
+      console.log('go!');
+    }
+
+    var Bike = function (wheel) {
+      this.wheel = wheel;
+    }
+    var car = new Car(4, 'Toyota');
+    var bike = new Bike(2);
+    console.log(car);
+
+    var Test = React.createClass({
+      propTypes: {
+        vihicle: React.PropTypes.instanceOf(Car)
+      },
+      render: function () {
+        return (
+          <p>I drive {this.props.vihicle.brand} car and its has {this.props.vihicle.wheel} </p>
+        );
+      }
+    });
+    React.renderComponent(<Test vihicle={car} />, document.getElementById('car'));
+    // React.renderComponent(<Test vihicle={bike} />, document.getElementById('bike'));
+    </script>
+  </body>
+</html>

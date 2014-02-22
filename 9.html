@@ -1,0 +1,65 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Test = React.createClass({
+      getInitialState: function () {
+        console.log("> getInitialState()");
+        return {user: 'AndyYou'};
+      },
+      componentWillMount: function () {
+        console.log("> componentWillMount()");
+      },
+      componentDidMount: function (node) {
+        console.log("> componentDidMount(node)");
+        console.log(node.className);
+        console.log(node.value);
+        console.log(node.id);
+        console.log(this.getDOMNode().className);
+        console.log(this.getDOMNode().value);
+        console.log(this.getDOMNode().id);
+      },
+      componentWillReceiveProps: function (nextProps) {
+        console.log("> componentWillReceiveProps(nextProps)");
+        console.log(nextProps);
+      },
+      handleChange: function (e) {
+        console.log(e.target.value);
+        this.setState({user: e.target.value});
+      },
+      shouldComponentUpdate: function (nextProps, nextState) {
+        console.log("> shouldComponentUpdate(nextProps, nextState)");
+        console.log("nextProps: ");
+        console.log(nextProps);
+        console.log("nextState: ");
+        console.log(nextState);
+        return true; /* need return true/false */
+      },
+      componentWillUpdate: function (nextProps, nextState) {
+        console.log("> componentWillUpdate(nextProps, nextState)");
+      },
+      componentWillUnmount: function () {
+        console.log("> componentWillUnmount()");
+      },
+      render: function () {
+        return (
+          <input type='text' id='foobar' value={this.state.user} className='nav' onChange={this.handleChange} />
+        );
+      }
+    });
+    var test = React.renderComponent(<Test title='Untitled' />, document.getElementById('example'));
+    // test.setProps({title: 'No'});
+    // React.unmountComponentAtNode(document.getElementById('example'));
+    // test.setState({user:'Calvert'});
+
+    </script>
+  </body>
+</html>

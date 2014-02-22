@@ -1,0 +1,36 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var App = React.createClass({
+      getInitialState: function () {
+        return {userInput: ''}
+      },
+      handleKeyUp: function (e) {
+        this.setState({userInput: this.getDOMNode().value});
+      },
+      clearAndFocusInput: function () {
+        this.setState({userInput: ''});
+      },
+      render: function () {
+        return (
+          <div>
+            <div onClick={this.clearAndFocusInput} >Click to Focus and Reset</div>
+            <input value={this.state.userInput} onKeyUp={this.handleKeyUp} />
+          </div>
+        );
+      }
+
+    });
+    React.renderComponent(<App />, document.getElementById('example'));
+    </script>
+  </body>
+</html>

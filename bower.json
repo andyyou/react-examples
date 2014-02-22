@@ -1,0 +1,19 @@
+{
+  "name": "react-0.8.0",
+  "description": "N/A",
+  "version": "0.0.0",
+  "authors": [
+    "AndyYou"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    
+  }
+}

@@ -1,0 +1,37 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <div id='ex2'></div>
+    <script>
+    function methodA(p1, p2, p3) {
+      console.log('====');
+      console.log(arguments);
+      console.log(arguments.callee);
+      console.log(arguments.callee.caller);
+      console.log(arguments.callee.length);
+      console.log(arguments.length);
+      console.log(p1);
+      console.log(p2);
+      console.log(p3);
+      console.log('done!');
+    }
+
+    function handleCaller() {
+      methodA('xxx', 'yyy');
+      methodA.apply(handleCaller, ['xxx', 'yyy']);
+    }
+    function init(){
+      handleCaller();
+      methodA.call(handleCaller, 'xxx', 'yyy');
+    }
+    init();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!-- ex-1.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id='content'></div>
+    <h1>Static H1</h1>
+
+    <script type='text/jsx'>
+      /** @jsx React.DOM */
+      var Simple = React.createClass({
+        render: function () {
+          return (
+            <a href='http://andyyou.logdown.com/'>AndyYou &middot;</a>
+          );
+        }
+      });
+      var Container = React.createClass({
+        render: function () {
+          return (
+            <div>
+              <li>{'First &middot; Second'}<Simple /> &middot; </li>
+            </div>
+          );
+        }
+      });
+
+      var Text = React.createClass({
+        render: function () {
+          return (
+            <div>First &middot; Second</div>
+          );
+        }
+      });
+
+      React.renderComponent(<Container />, document.getElementById('content'));
+    </script>
+
+  </body>
+</html>

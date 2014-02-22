@@ -1,0 +1,57 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <div id="date"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Card = React.createClass({
+
+      render: function () {
+        return (
+          <div>
+            <p>{this.props.title}</p>
+            <p>{this.props.anthor}</p>
+          </div>
+        );
+      },
+      componentDidMount: function () {
+        console.log('done');
+        this.setProps({title: 'Cool'});
+      }
+    });
+    var card = React.renderComponent(
+      <Card title='Hello, React' anthor='AndyYou' />,
+      document.getElementById('example')
+    );
+    React.renderComponent(
+      <Card title='Hello, React!' anthor='Calvert' />,
+      document.getElementById('example')
+    );
+
+    // card.replaceProps({children: null});
+
+    // React.renderComponent(<Card title='Hello, React' anthor='AndyYou'>Hello</Card>,document.getElementById('example'));
+
+    // card.setProps({children: <p>Opp!</p>});
+    // card.replaceProps({children: <p>Opp!</p>});
+
+    // var card = React.renderComponent(
+    //   <Card>
+    //     <p>Paragraph 1</p>
+    //     <p>Paragraph 2</p>
+    //   </Card>,
+    //   document.getElementById('example')
+    // );
+    // card.setProps({children: <p>Paragraph 1</p>});
+    // card.setProps({children: <p style={{display: 'none'}}>Paragraph 1</p>});
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Avatar = React.createClass({
+      render: function () {
+        return (
+          <div>
+            <ProfilePic username={this.props.username} />
+            <ProfileLink username='phw' />
+            <ProfileLink username={this.props.username} />
+            {this.props.children /* 載入子元素 */ }
+          </div>
+          /* comment */
+        );
+      }
+    });
+    var ProfilePic = React.createClass({
+      render: function () {
+        return (
+          <img src={'http://graph.facebook.com/' + this.props.username + '/picture'} />
+        );
+      }
+    });
+    var ProfileLink = React.createClass({
+      render: function () {
+        return (
+          <a href={'http://www.facebook.com/' + this.props.username}>
+            {this.props.username}
+          </a>
+        );
+      }
+    });
+    React.renderComponent(<Avatar username='andyyu0920'><ProfileLink username='andyyu0920' /></Avatar>, document.getElementById('example'));
+    React.renderComponent(<Avatar username='phw'><ProfileLink username='phw' /></Avatar>, document.getElementById('example'));
+    </script>
+  </body>
+</html>

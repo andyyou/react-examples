@@ -1,0 +1,46 @@
+<!-- ex-1.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id='content'></div>
+    <h1>Static H1</h1>
+    <script>
+    $(function () {
+      $('h1').click(function () {
+        console.log('h1 click');
+      });
+    });
+    </script>
+
+    <script type='text/jsx'>
+      /** @jsx React.DOM */
+      var Simple = React.createClass({
+        render: function () {
+          return (
+            <a href='http://andyyou.logdown.com/'>AndyYou</a>
+          );
+        }
+      });
+      var Nav = React.createClass({
+        render: function () {
+          return (
+            <nav>
+
+              <li><Simple /></li>
+              <li>  { /* comment */}Home</li>
+              <li>About</li>
+            </nav>
+          );
+        }
+      });
+
+      React.renderComponent(<Nav />, document.getElementById('content'));
+    </script>
+
+  </body>
+</html>

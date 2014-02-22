@@ -1,0 +1,26 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script>
+    var val1, val2;
+    function Log () {
+      console.log(this);
+      console.log(this.getAttribute('value'));
+      console.log(document.getElementsByName(this.name)[0].value);
+      console.log(this.value);
+    }
+    function Update(val) {
+      document.getElementsByName('i2').value = val;
+      console.log(val);
+    }
+    </script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <input type='text' name='i1' value='Untitled' onchange="Log.apply(this)" />
+  </body>
+</html>

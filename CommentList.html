@@ -1,0 +1,114 @@
+<!-- template.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <div id='example'></div>
+    <script type="text/jsx">
+      /**
+       * @jsx React.DOM
+       */
+      var converter = new Showdown.converter();
+      var data = [
+        {author: "Pete Hunt", text: "This is one comment"},
+        {author: "Jordan Walke", text: "This is *another* comment"}
+      ];
+
+      var Example = React.createClass({
+        render: function () {
+          return (
+            <div>Example</div>
+          );
+        }
+      });
+      React.renderComponent(<Example />, document.getElementById('example'));
+      var CommentBox = React.createClass({
+        loadCommentsFromServer: function () {
+          $.ajax({
+            url: 'comments.json',
+            success: function (data) {
+              this.setState({data: data});
+            }.bind(this),
+            error: function (xhr, status, err) {
+              console.error("comments.json", status, err.toString());
+            }.bind(this)
+          });
+        },
+        getInitialState: function () {
+          return {data: []};
+        },
+        componentWillMount: function () {
+          this.loadCommentsFromServer();
+          setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+        },
+        render: function () {
+          return (
+            <div className='commentBox'>
+              <h1>Comments</h1>
+              <CommentList data={this.state.data}/>
+              <CommentForm />
+            </div>
+          );
+        }
+      });
+
+      var CommentList = React.createClass({
+        render: function () {
+          var commentNodes = this.props.data.map(function (comment) {
+            return <Comment author={comment.author}>{comment.text}</Comment>
+          });
+          return (
+            <div className='commentList'>
+            {commentNodes}
+            </div>
+          );
+        }
+      });
+
+      var CommentForm = React.createClass({
+        handleSubmit: function () {
+          var anthor = this.refs.author.getDOMNode().value.trim();
+          var text = this.refs.text.getDOMNode().value.trim();
+          if (!text || !anthor) {
+            return false;
+          }
+          // TODO: send request to the server
+          this.refs.author.getDOMNode().value = '';
+          this.refs.text.getDOMNode().value = '';
+          return false;
+        },
+        render: function () {
+          return (
+            <form className='commentForm' onSubmit={this.handleSubmit}>
+            <input type='text' placeholder='Your Name' ref='author' />
+            <input type='text' placeholder='Say something...' ref='text'/>
+            <input type='submit' value='post' />
+            </form>
+          );
+        }
+      });
+
+      var Comment = React.createClass({
+        render: function () {
+          var rawMarkup = converter.makeHtml(this.props.children.toString());
+          return (
+            <div className='comment'>
+              <h2 className='commentAuthor'>
+              {this.props.author}
+              </h2>
+              <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+            </div>
+          );
+        }
+      });
+
+      React.renderComponent(<CommentBox url="comments.json" pollInterval={2000} />, document.getElementById('content'));
+    </script>
+  </body>
+</html>

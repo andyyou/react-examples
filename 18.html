@@ -1,0 +1,48 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example-1"></div>
+    <div id="example-2"></div>
+    <script>
+    $(function () {
+      $(document).on('click', '.ex-2', function () {
+        $(this).val('B');
+      });
+    });
+    </script>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Test1 = React.createClass({
+      callChange: function () {
+        console.log('ex1 call change!!');
+      },
+      render: function () {
+        return (
+          <div onChange={this.callChange} className='ex-1'>A</div>
+        );
+      }
+    });
+    var Test2 = React.createClass({
+      callChange: function () {
+        console.log('ex2 call change!!');
+      },
+      callClick: function () {
+        console.log(this.props.value);
+      },
+      render: function () {
+        return (
+          <input className='ex-2' onChange={this.callChange} onClick={this.callClick} />
+        );
+      }
+    })
+    React.renderComponent(<Test1 />, document.getElementById('example-1'));
+    React.renderComponent(<Test2 />, document.getElementById('example-2'));
+    </script>
+  </body>
+</html>

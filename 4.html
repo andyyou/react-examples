@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+<title>React | Event Handling</title>
+<script src="http://fb.me/react-0.8.0.js"></script>
+<script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+<style>a{color:#00f;cursor:pointer;}a:hover{text-decoration:underline;}</style>
+</head>
+<body>
+<script type="text/jsx">
+/** @jsx React.DOM */
+var Clicker = React.createClass({
+    render: function() {
+        var bind = this.handleBind.bind(this);
+        return <div>
+        <a onClick={this.handleNormal}>Normal</a> |
+        <a onClick={bind}>Bind</a> |
+        <a onClick={this.autoBindClick}>autoBind</a>
+        </div>;
+    },
+    handleNormal: function(event) {
+        alert('触发常规JS事件');
+    },
+    handleBind: function(event) {
+        alert(this.ALERT_BIND);
+    },
+    autoBindClick: React.autoBind(function(){
+        alert(this.ALERT_AUTOBIND);
+    }),
+    ALERT_BIND: '触发bind事件',
+    ALERT_AUTOBIND: '触发autoBind事件'
+});
+
+var myClicker = <Clicker />;
+React.renderComponent(myClicker, document.body);
+</script>
+</body>
+</html>

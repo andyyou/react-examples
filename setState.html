@@ -1,0 +1,46 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Test = React.createClass({
+      getInitialState: function () {
+        return {value: 'Hello!'}
+      },
+      handleChange: function (event) {
+        this.setState({value: event.target.value});
+      },
+      render: function () {
+        return (
+          <div>
+            <input type='text' value={this.state.value} onChange={this.handleChange} />
+            <SubText value={this.state.value}/>
+          </div>
+        );
+      }
+    });
+
+    var SubText = React.createClass({
+      getInitialState: function () {
+        return {value: "SubText State"}
+      },
+      render: function () {
+        return (
+          <select>
+            <option>{this.state.value}</option>
+          </select>
+        );
+      }
+    });
+
+    React.renderComponent(<Test value='ABC!'/>, document.getElementById('example'));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!-- empty.html -->
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var Clicker = React.createClass({
+      render: function () {
+        var bind = this.handleBind.bind(this);
+        console.log(bind);
+        console.log(typeof bind);
+        return (
+          <div>
+            {/* comment */}
+            <a onClick={this.handleNormal}>Normal</a>
+            {/* comment */}
+            <a onClick={bind}>Bind</a>
+            {/* comment */}
+            <a onClick={this.autoBindClick}>AutoBind</a>
+          </div>
+        );
+      },
+      handleNormal: function (event) {
+        alert('Normal Event');
+      },
+      handleBind: function (event) {
+        alert(this.ALERT_BIND);
+      },
+      autoBindClick: function (event) {
+        alert(this.ALERT_AUTOBIND);
+      },
+      ALERT_BIND: 'Bind Event',
+      ALERT_AUTOBIND: 'Auto Bind Event',
+      /*
+      oldAutoBindClick: React.autoBind(function () {...})
+      */
+    });
+
+    React.renderComponent(<Clicker />, document.getElementById('example'))
+    </script>
+  </body>
+</html>

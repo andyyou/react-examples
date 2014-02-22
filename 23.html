@@ -1,0 +1,30 @@
+<!-- empty.html -->
+<html>
+<head>
+<title>Hello React</title>
+<script src="http://fb.me/react-0.8.0.js"></script>
+<script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script>
+var node, val1, val2;
+function Log () {
+console.log(node);
+console.log(document.getElementsByName("title")[0]);
+console.log('attr: ' + val1);
+console.log('value: ' + val2);
+console.log("jQuery:" + $('input[name=title]').val());
+}
+</script>
+</head>
+<body>
+<div id="example"></div>
+<input type='text' name='title' value='Untitled' onchange="Log()" />
+<script>
+
+node = document.getElementsByName("title")[0];
+console.log(node);
+val1 = node.getAttribute('value');
+val2 = node.value;
+</script>
+</body>
+</html>
